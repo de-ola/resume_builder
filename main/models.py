@@ -5,6 +5,7 @@ from ckeditor.fields import RichTextField
 # Create your models here.
 class Biodata(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="biodata")
+    profile_pic = models.ImageField(upload_to='user/pics/', blank=True, null=True)
     gender_type = (
         ("Male", "Male"),
         ("Female", "Female"),
@@ -17,10 +18,10 @@ class Biodata(models.Model):
     facebook_url = models.URLField(blank=True, null=True)
     linkedin_url = models.URLField(blank=True, null=True)
     telegram_url = models.URLField(blank=True, null=True)
-    bio = RichTextField()
+    bio = RichTextField(blank=True, null=True)
 
 class Projects(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="projects")
-    project_name = models.CharField()
-    project_url = models.URLField()
-    project_description = RichTextField()
+    project_name = models.CharField(max_length=100000, blank=True, null=True)
+    project_url = models.URLField(blank=True, null=True)
+    project_description = RichTextField(blank=True, null=True)
