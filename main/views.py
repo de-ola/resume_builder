@@ -5,6 +5,7 @@ from user.models import User
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from .serializers import *
+from user.serializers import UserListSerializer
 
 # Create your views here.
 class BiodataCreateView(generics.ListCreateAPIView):
@@ -48,3 +49,20 @@ class ProjectEditView(generics.RetrieveUpdateDestroyAPIView):
             return qs.filter(user=request.user)
         else:
             return Projects.objects.none()
+
+class UserResumeView(generics.ListAPIView):
+    queryset = User.objects.all()
+    serializer_class = ResumeSerializer
+    permission_classes = [permissions.IsAdminUser, permissions.IsAuthenticatedOrReadOnly]
+
+    def get_queryset(self, request):
+        qs = super().get_queryset()
+        if qs is not None:
+            return qs.filter(user=request.user).first()
+        else:
+            return User.objects.none()
+        
+class ResumeListView(generics.ListAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserListSerializer
+    permission_classes = [permissions.IsAdminUser, permissions.IsAuthenticatedOrReadOnly]

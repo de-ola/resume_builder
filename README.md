@@ -17,5 +17,4 @@ Endpoints and functions
 'api/bio/edit/<int:pk>/' => this edits the user's bio
 'api/projects/add/' => this created a new project
 'api/projects/edit/<int:pk>/' => edits already created projects
-'api/resume/' => this shows the complete resume data of the current loggrd in user
-'api/resume/list/' => this gives a list of resumés of different users
+'api/resume/' => this shows the complete resume data of the current logged in user
